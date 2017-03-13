@@ -64,4 +64,19 @@ public class FuncSetTest {
         assertTrue(FuncSet.contains(filteredSet, 3));
         assertTrue(FuncSet.contains(filteredSet, 5));
     }
+
+    @Test
+    public void test_checkForAll() {
+        FuncSet.Set numSet = FuncSet.setFrom(1, 2, 3, 4, 5);
+
+        assertTrue(FuncSet.checkForAll(numSet, x -> x > 0));
+    }
+
+    @Test
+    public void test_checkForFirst() {
+        FuncSet.Set numSet = FuncSet.setFrom(1, 2, 3, 4, 5);
+
+        assertTrue(FuncSet.checkForFirst(numSet, x -> x % 2 == 0));
+    }
+
 }
