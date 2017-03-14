@@ -10,8 +10,15 @@ import java.util.function.Function;
  */
 public class FuncSet {
 
-    private static final int BOUNDS = 1000;
+    /**
+     * We're using function for defining functional Set
+     */
     public interface Set extends Function<Integer, Boolean> {}
+
+    /**
+     * We need bounds for know elements inside
+     */
+    private static final int BOUNDS = 1000;
 
     public static Set singletonSet(Integer value) { return x -> value == x; }
     public static Boolean contains(Set s, Integer value) { return s.apply(value); }
@@ -19,6 +26,8 @@ public class FuncSet {
     public static Set intersect(Set s1, Set s2) { return x -> s1.apply(x) && s2.apply(x); }
     public static Set diff(Set s1, Set s2) { return x -> s1.apply(x) && !s2.apply(x); }
     public static Set filter(Set s1, Function<Integer, Boolean> filter) { return x -> s1.apply(x) && filter.apply(x); }
+
+    public static Set map(Set s1, Function<Integer, Integer> func) { return x -> !checkForAll(s1, y -> func.apply(y).compareTo(x) != 0); }
 
     public static Boolean checkForAll(Set s1, Function<Integer, Boolean> funcPredicate) {
         BiFunction<BiFunction, Integer, Boolean> funcIteration =

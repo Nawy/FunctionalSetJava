@@ -79,4 +79,20 @@ public class FuncSetTest {
         assertTrue(FuncSet.checkForFirst(numSet, x -> x % 2 == 0));
     }
 
+    @Test
+    public void test_map() {
+        FuncSet.Set numSet = FuncSet.setFrom(1, 2, 3, 4);
+        numSet = FuncSet.map(numSet, x -> x * 10);
+
+        assertTrue(FuncSet.contains(numSet, 10));
+        assertTrue(FuncSet.contains(numSet, 20));
+        assertTrue(FuncSet.contains(numSet, 30));
+        assertTrue(FuncSet.contains(numSet, 40));
+
+        assertTrue(!FuncSet.contains(numSet, 1));
+        assertTrue(!FuncSet.contains(numSet, 2));
+        assertTrue(!FuncSet.contains(numSet, 3));
+        assertTrue(!FuncSet.contains(numSet, 4));
+    }
+
 }
